@@ -1,0 +1,218 @@
+[
+  {
+    "api": "java.net.HttpURLConnection#openConnection",
+    "category": "Networking"
+  },
+  {
+    "api": "javax.net.ssl.HttpsURLConnection#setHostnameVerifier",
+    "category": "Networking"
+  },
+  {
+    "api": "java.net.Socket#connect",
+    "category": "Networking"
+  },
+  {
+    "api": "java.net.DatagramSocket#send",
+    "category": "Networking"
+  },
+  {
+    "api": "java.net.URL#openStream",
+    "category": "Networking"
+  },
+  {
+    "api": "java.net.InetAddress#getHostAddress",
+    "category": "Networking"
+  },
+  {
+    "api": "java.net.HttpURLConnection#getInputStream",
+    "category": "Networking"
+  },
+  {
+    "api": "javax.crypto.Cipher#getInstance",
+    "category": "Crypto"
+  },
+  {
+    "api": "javax.crypto.Cipher#doFinal",
+    "category": "Crypto"
+  },
+  {
+    "api": "javax.crypto.Cipher#init",
+    "category": "Crypto"
+  },
+  {
+    "api": "javax.crypto.spec.SecretKeySpec",
+    "category": "Crypto"
+  },
+  {
+    "api": "javax.crypto.KeyGenerator#generateKey",
+    "category": "Crypto"
+  },
+  {
+    "api": "javax.crypto.Mac#getInstance",
+    "category": "Crypto"
+  },
+  {
+    "api": "java.security.MessageDigest#getInstance",
+    "category": "Crypto"
+  },
+  {
+    "api": "java.security.Signature#getInstance",
+    "category": "Crypto"
+  },
+  {
+    "api": "android.telephony.TelephonyManager#getDeviceId",
+    "category": "Device Info"
+  },
+  {
+    "api": "android.telephony.SubscriptionManager#getActiveSubscriptionInfoList",
+    "category": "Device Info"
+  },
+  {
+    "api": "android.provider.Settings$Secure#getString",
+    "category": "Device Info"
+  },
+  {
+    "api": "android.os.Build#SERIAL",
+    "category": "Device Info"
+  },
+  {
+    "api": "android.bluetooth.BluetoothAdapter#getAddress",
+    "category": "Device Info"
+  },
+  {
+    "api": "android.net.wifi.WifiInfo#getMacAddress",
+    "category": "Device Info"
+  },
+  {
+    "api": "dalvik.system.DexClassLoader",
+    "category": "Dynamic Code"
+  },
+  {
+    "api": "java.lang.ClassLoader#defineClass",
+    "category": "Dynamic Code"
+  },
+  {
+    "api": "java.lang.Class#forName",
+    "category": "Dynamic Code"
+  },
+  {
+    "api": "java.lang.reflect.Method#invoke",
+    "category": "Dynamic Code"
+  },
+  {
+    "api": "java.lang.Runtime#exec",
+    "category": "Dynamic Code"
+  },
+  {
+    "api": "android.webkit.WebView#addJavascriptInterface",
+    "category": "Dynamic Code"
+  },
+  {
+    "api": "dalvik.system.PathClassLoader",
+    "category": "Dynamic Code"
+  },
+  {
+    "api": "android.Manifest.permission.READ_SMS",
+    "category": "Permissions"
+  },
+  {
+    "api": "android.Manifest.permission.RECEIVE_SMS",
+    "category": "Permissions"
+  },
+  {
+    "api": "android.Manifest.permission.READ_CONTACTS",
+    "category": "Permissions"
+  },
+  {
+    "api": "android.Manifest.permission.ACCESS_FINE_LOCATION",
+    "category": "Permissions"
+  },
+  {
+    "api": "android.Manifest.permission.ACCESS_COARSE_LOCATION",
+    "category": "Permissions"
+  },
+  {
+    "api": "android.Manifest.permission.CAMERA",
+    "category": "Permissions"
+  },
+  {
+    "api": "android.Manifest.permission.RECORD_AUDIO",
+    "category": "Permissions"
+  },
+  {
+    "api": "android.hardware.Camera#open",
+    "category": "Sensors"
+  },
+  {
+    "api": "android.hardware.Camera#takePicture",
+    "category": "Sensors"
+  },
+  {
+    "api": "android.media.MediaRecorder#start",
+    "category": "Sensors"
+  },
+  {
+    "api": "android.location.LocationManager#requestLocationUpdates",
+    "category": "Sensors"
+  },
+  {
+    "api": "android.location.LocationListener#onLocationChanged",
+    "category": "Sensors"
+  },
+  {
+    "api": "android.content.ClipboardManager#getPrimaryClip",
+    "category": "Data Access"
+  },
+  {
+    "api": "android.content.ContentResolver#query",
+    "category": "Data Access"
+  },
+  {
+    "api": "android.database.sqlite.SQLiteDatabase#rawQuery",
+    "category": "Data Access"
+  },
+  {
+    "api": "android.content.SharedPreferences#getString",
+    "category": "Data Access"
+  },
+  {
+    "api": "android.app.admin.DevicePolicyManager#lockNow",
+    "category": "Admin Abuse"
+  },
+  {
+    "api": "android.app.admin.DevicePolicyManager#resetPassword",
+    "category": "Admin Abuse"
+  },
+  {
+    "api": "android.app.admin.DevicePolicyManager#wipeData",
+    "category": "Admin Abuse"
+  },
+  {
+    "api": "android.app.NotificationManager#notify",
+    "category": "System Control"
+  },
+  {
+    "api": "android.os.PowerManager#reboot",
+    "category": "System Control"
+  },
+  {
+    "api": "android.os.PowerManager#newWakeLock",
+    "category": "System Control"
+  },
+  {
+    "api": "android.app.ActivityManager#getRunningTasks",
+    "category": "System Control"
+  },
+  {
+    "api": "android.webkit.WebView#loadUrl",
+    "category": "Web"
+  },
+  {
+    "api": "android.webkit.CookieManager#getCookie",
+    "category": "Web"
+  },
+  {
+    "api": "android.webkit.WebView#evaluateJavascript",
+    "category": "Web"
+  }
+]
