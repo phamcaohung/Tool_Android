@@ -1,0 +1,10 @@
+# Python dependencies cho APK Tool Analyzer
+# Flask framework cho web API
+flask>=2.3.0
+
+# GeoIP2 database reader cho geolocation lookup
+geoip2>=4.7.0
+
+# MaxMindDB reader (dependency của geoip2)
+maxminddb>=2.2.0
+

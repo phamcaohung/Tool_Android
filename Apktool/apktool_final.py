@@ -878,8 +878,16 @@ def upload_and_scan_apk():
         f.write(apk_file.read())
 
     try:
-        APKTOOL_BAT = r"C:\Users\ADMIN\Desktop\Study\KLTN\apktool\apktool.bat"
-        cmd = [APKTOOL_BAT, "d", apk_path, "-o", decode_folder]
+        # Tìm apktool trong PATH hoặc sử dụng biến môi trường
+        # Trên Windows: apktool.bat, trên Linux/Mac: apktool
+        apktool_cmd = os.environ.get('APKTOOL_PATH', 'apktool')
+        if os.name == 'nt':  # Windows
+            # Thử tìm apktool.bat trong PATH
+            apktool_cmd = shutil.which('apktool.bat') or apktool_cmd
+        else:  # Linux/Mac
+            apktool_cmd = shutil.which('apktool') or apktool_cmd
+        
+        cmd = [apktool_cmd, "d", apk_path, "-o", decode_folder]
         print("[DEBUG] Running:", " ".join(cmd))
 
         completed = subprocess.run(cmd, check=True, capture_output=True, text=True, timeout=900)
