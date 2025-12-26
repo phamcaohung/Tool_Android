@@ -1,0 +1,58 @@
+# .dockerignore - loại trừ các file không cần thiết khi build Docker image
+
+# Python cache và virtual environment
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv/
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Git
+.git/
+.gitignore
+
+# Docker files (không cần copy vào image)
+docker-compose.yml
+Dockerfile
+.dockerignore
+
+# Documentation
+*.md
+README*
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+temp/
+tmp/
+
+# Test files (nếu có)
+test/
+tests/
+*_test.py
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# JSON output files (nếu có)
+*.json.bak
+

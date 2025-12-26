@@ -159,6 +159,15 @@ def extract_strings_from_dex(d):
         print(f"[WARN] Error extracting strings from DEX: {e}")
 
 
+def clean_url(url):
+    """Clean URL by removing trailing characters that might be part of XML/text."""
+    if not url:
+        return url
+    # Loại bỏ các ký tự trailing không hợp lệ trong URL
+    url = url.rstrip('.,;:!?)\'"')
+    return url.strip()
+
+
 def is_blacklisted_url(url):
     """Check if URL contains blacklisted domains."""
     return any(b in url.lower() for b in URL_BLACKLIST)
@@ -292,8 +301,8 @@ def scan_methods_for_apis_fast(d, dex_name, dx):
             # Normalize class name
             class_name_norm = class_name.lstrip('L').rstrip(';')
             
-            # Convert to smali path format
-            smali_file_path = class_name_norm.replace('/', '\\') + ".smali"
+            # Convert to smali path format (sử dụng / cho Linux compatibility)
+            smali_file_path = class_name_norm + ".smali"
 
             for method in cls.get_methods():
                 try:

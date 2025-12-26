@@ -1,0 +1,13 @@
+# Python dependencies cho Androguard APK Analyzer
+# Flask framework cho web API
+flask>=2.3.0
+
+# Androguard - công cụ phân tích APK Android
+androguard>=3.4.0
+
+# GeoIP2 database reader cho geolocation lookup (nếu cần)
+geoip2>=4.7.0
+
+# MaxMindDB reader (dependency của geoip2)
+maxminddb>=2.2.0
+

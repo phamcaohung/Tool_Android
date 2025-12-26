@@ -1,0 +1,40 @@
+# docker-compose.yml - Cấu hình để chạy Androguard APK Analyzer dễ dàng
+version: '3.8'
+
+services:
+  androguard-analyzer:
+    # Build image từ Dockerfile trong thư mục hiện tại
+    build:
+      context: .
+      dockerfile: Dockerfile
+    
+    # Tên container
+    container_name: androguard-analyzer
+    
+    # Port mapping: host:container
+    # Truy cập ứng dụng tại http://localhost:5050
+    ports:
+      - "5050:5050"
+    
+    # Volume mounts để lưu trữ dữ liệu
+    volumes:
+      # Mount thư mục temp cho các file tạm thời
+      - ./temp:/app/temp
+    
+    # Biến môi trường (có thể tùy chỉnh)
+    environment:
+      - PYTHONUNBUFFERED=1
+    
+    # Restart policy: tự động restart nếu container bị dừng
+    restart: unless-stopped
+    
+    # Resource limits (tùy chọn - có thể điều chỉnh)
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
