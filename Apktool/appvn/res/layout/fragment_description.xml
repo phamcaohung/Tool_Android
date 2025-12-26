@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:paddingBottom="58.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <View android:background="@color/line_divider" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+        <LinearLayout android:orientation="vertical" android:id="@id/vDes" android:paddingLeft="12.0dip" android:paddingRight="12.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="12.0dip" android:layout_marginBottom="12.0dip">
+            <TextView android:textSize="16.0sp" android:textColor="@color/black" android:id="@id/tvTitleDes" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/description_title" android:fontFamily="sans-serif-medium" />
+            <TextView android:textSize="13.0sp" android:textColor="@color/grey_text" android:ellipsize="end" android:id="@id/tvDes" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12.0dip" android:maxLines="2" android:lineSpacingExtra="6.0dip" />
+            <TextView android:textSize="14.0sp" android:textColor="@color/color_button_download" android:layout_gravity="center_horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:text="@string/read_more" android:textAllCaps="true" android:fontFamily="sans-serif-medium" />
+        </LinearLayout>
+        <View android:background="@color/line_divider" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+        <LinearLayout android:orientation="vertical" android:paddingLeft="12.0dip" android:paddingRight="12.0dip" android:fitsSystemWindows="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="12.0dip" android:layout_marginBottom="12.0dip">
+            <TextView android:textSize="16.0sp" android:textColor="@color/black" android:id="@id/tvTitleScreenShot" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/details_screenshots" android:fontFamily="sans-serif-medium" />
+            <androidx.recyclerview.widget.RecyclerView android:id="@id/rcSreenshot" android:layout_width="fill_parent" android:layout_height="220.0dip" android:layout_marginTop="12.0dip" />
+        </LinearLayout>
+        <View android:background="@color/line_divider" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+        <LinearLayout android:orientation="vertical" android:id="@id/vRate" android:paddingLeft="12.0dip" android:paddingRight="12.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="12.0dip" android:layout_marginBottom="12.0dip">
+            <TextView android:textSize="16.0sp" android:textColor="@color/black" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/rate_title" android:fontFamily="sans-serif-medium" />
+            <TextView android:textSize="14.0sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/rate_content" android:fontFamily="sans-serif" />
+            <RatingBar android:layout_gravity="center_horizontal" android:id="@id/rtBar" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:layout_marginBottom="16.0dip" android:stepSize="1.0" android:isIndicator="false" style="@android:style/Widget.Holo.RatingBar.Indicator" />
+            <TextView android:textSize="14.0sp" android:textColor="@color/color_button_download" android:layout_gravity="center_horizontal" android:id="@id/tvWriteReview" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/write_a_review" android:textAllCaps="true" android:fontFamily="sans-serif-medium" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

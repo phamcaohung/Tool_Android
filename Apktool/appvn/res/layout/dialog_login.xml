@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="20.0sp" android:textStyle="bold" android:textColor="@color/black" android:id="@id/tvTitle" android:padding="16.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/login" />
+    <RelativeLayout android:id="@id/vFacebook" android:padding="12.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <ImageView android:id="@id/imgFacebook" android:layout_width="40.0dip" android:layout_height="40.0dip" android:src="@drawable/ic_facbook" android:layout_centerVertical="true" />
+        <TextView android:textColor="@color/black" android:gravity="center_vertical" android:paddingLeft="12.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/login_facebook" android:layout_toRightOf="@id/imgFacebook" android:layout_centerVertical="true" />
+    </RelativeLayout>
+    <RelativeLayout android:id="@id/vWallet" android:padding="12.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <ImageView android:id="@id/imgWallet" android:layout_width="40.0dip" android:layout_height="40.0dip" android:src="@drawable/ic_appota_wallet" android:layout_centerVertical="true" />
+        <TextView android:textColor="@color/black" android:gravity="center_vertical" android:paddingLeft="12.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/login_wallet" android:layout_toRightOf="@id/imgWallet" android:layout_centerVertical="true" />
+    </RelativeLayout>
+</LinearLayout>

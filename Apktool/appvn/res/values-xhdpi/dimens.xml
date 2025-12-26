@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="collection_horizontal_height">220.0dip</dimen>
+    <dimen name="collection_horizontal_list">140.0dip</dimen>
+    <dimen name="collection_item_height">86.0dip</dimen>
+    <dimen name="collection_item_width">86.0dip</dimen>
+    <dimen name="detail_top_height">98.0dip</dimen>
+    <dimen name="half_detail_top_height">65.0dip</dimen>
+    <dimen name="header_collection_height">50.0dip</dimen>
+    <dimen name="height_top_app">145.0dip</dimen>
+    <dimen name="margin_collection">50.0dip</dimen>
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:orientation="vertical" android:background="@color/background_banner" android:layout_width="fill_parent" android:layout_height="wrap_content" card_view:cardCornerRadius="4.0dip" card_view:cardElevation="2.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:card_view="http://schemas.android.com/apk/res-auto">
+    <com.google.android.gms.ads.formats.UnifiedNativeAdView android:id="@id/ad_view" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <RelativeLayout android:layout_gravity="center" android:orientation="vertical" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="50.0dip">
+            <RelativeLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <com.google.android.gms.ads.formats.MediaView android:layout_gravity="center_horizontal" android:id="@id/ad_media" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="2.0dip" />
+                    <LinearLayout android:orientation="horizontal" android:background="@color/ss_black_50" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true">
+                        <ImageView android:layout_gravity="center_vertical" android:id="@id/ad_icon" android:paddingLeft="8.0dip" android:layout_width="40.0dip" android:layout_height="40.0dip" android:adjustViewBounds="true" />
+                        <RelativeLayout android:orientation="vertical" android:paddingLeft="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <LinearLayout android:layout_gravity="end" android:id="@id/action" android:paddingTop="4.0dip" android:paddingRight="8.0dip" android:paddingBottom="4.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentRight="true" android:layout_centerVertical="true">
+                                <TextView android:textSize="12.0sp" android:textColor="@color/white" android:id="@id/ad_price" android:paddingLeft="5.0dip" android:paddingRight="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingStart="5.0dip" android:paddingEnd="5.0dip" />
+                                <TextView android:textSize="12.0sp" android:textColor="@color/white" android:id="@id/ad_store" android:paddingLeft="5.0dip" android:paddingRight="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingStart="5.0dip" android:paddingEnd="5.0dip" />
+                                <TextView android:textSize="12.0sp" android:textColor="@color/white" android:gravity="center" android:layout_gravity="center_vertical" android:id="@id/ad_call_to_action" android:background="@drawable/button_transparent_border" android:paddingLeft="12.0dip" android:paddingTop="6.0dip" android:paddingRight="12.0dip" android:paddingBottom="6.0dip" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                            </LinearLayout>
+                            <TextView android:textSize="14.0sp" android:textColor="@color/white" android:ellipsize="end" android:id="@id/ad_headline" android:paddingLeft="8.0dip" android:paddingRight="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:maxLines="1" android:lines="1" android:layout_toLeftOf="@id/action" android:layout_centerVertical="true" />
+                        </RelativeLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+                <TextView android:textSize="12.0sp" android:textColor="#ffffffff" android:layout_gravity="left" android:id="@id/ad_attribution" android:background="@color/color_accent" android:padding="4.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ad" android:layout_alignParentLeft="true" android:layout_alignParentTop="true" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </com.google.android.gms.ads.formats.UnifiedNativeAdView>
+</androidx.cardview.widget.CardView>

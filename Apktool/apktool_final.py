@@ -11,6 +11,7 @@ import geoip2.database
 
 app = Flask(__name__)
 
+
 # Regex patterns
 URL_PATTERN = re.compile(r"(https?://[^\s\"']+)", re.IGNORECASE)
 
@@ -24,6 +25,11 @@ URL_BLACKLIST = [
 ]
 
 ANDROID_NS = '{http://schemas.android.com/apk/res/android}'
+
+SPECIAL_ROOTS = {
+    "com.google.android.gms": "com.google.android.gms",
+    "com.google.firebase": "com.google.firebase"
+}
 
 # Text file extensions
 TEXT_EXTENSIONS = {'.smali', '.xml', '.json', '.js', '.html', '.properties', '.java', '.kt'}
@@ -59,6 +65,7 @@ for api in SUSPICIOUS_APIS:
 SUSPICIOUS_API_PATTERN = re.compile("|".join(patterns), re.IGNORECASE)
 
 
+
 def is_text_file(file_path):
     """Check if file is a text file based on extension"""
     name = file_path.name.lower()
@@ -74,6 +81,119 @@ def is_text_file(file_path):
 def is_blacklisted_url(url: str) -> bool:
     url_lower = url.lower()
     return any(bad in url_lower for bad in URL_BLACKLIST)
+
+
+def normalize_package(pkg):
+    """Normalize package names for common libraries"""
+    for root in SPECIAL_ROOTS:
+        if pkg.startswith(root):
+            return SPECIAL_ROOTS[root]
+    return pkg
+
+
+def merge_common_packages(items):
+    """Merge sub-packages into parent packages"""
+    items = sorted(items)
+    merged = []
+    for item in items:
+        if not merged or not item.startswith(merged[-1] + '.'):
+            merged.append(item)
+    return merged
+
+
+def extract_sbom(decode_folder, app_package=None):
+    """
+    Extract Software Bill of Materials (SBOM) from APK
+    
+    Args:
+        decode_folder: Path to decoded APK folder
+        app_package: App's package name to filter out
+    
+    Returns:
+        dict: SBOM data with versioned libraries and packages
+    """
+    """
+    Extract SBOM (Software Bill of Materials) from APK
+    Returns versioned libraries and package names
+    """
+    folder = Path(decode_folder)
+    
+    sbom_data = {
+        "sbom_versioned": [],
+        "sbom_packages": []
+    }
+    
+    packages = set()
+    
+    # Extract packages from smali files
+    pkg_pattern = re.compile(r'^\.class\s+.*?L([^;]+);')
+
+    smali_folders = [
+        p for p in folder.iterdir()
+        if p.is_dir() and p.name.startswith("smali")
+    ]
+
+    for smali_folder in smali_folders:
+        for smali_file in smali_folder.rglob("*.smali"):
+            try:
+                with open(smali_file, 'r', encoding='utf-8', errors='ignore') as f:
+                    first_line = f.readline()
+                    match = pkg_pattern.search(first_line)
+
+                    if not match:
+                        continue
+
+                    full_class = match.group(1).replace('/', '.')
+                    pkg = '.'.join(full_class.split('.')[:-1])
+
+                    if pkg.startswith(('android.', 'java.', 'javax.')):
+                        continue
+
+                    packages.add(pkg)
+
+            except Exception:
+                continue
+
+    normalized_packages = set()
+    for pkg in packages:
+        normalized_packages.add(normalize_package(pkg))
+
+    packages = set(merge_common_packages(normalized_packages))
+    
+    filtered_packages = []
+    for pkg in packages:
+        if not pkg or len(pkg.strip()) == 0:
+            continue
+        
+        if pkg.startswith(('android', 'java', 'javax')):
+            continue
+        
+        if app_package:
+            if pkg == app_package or pkg.startswith(app_package + '.'):
+                print(f"[DEBUG] Skipping app package: {pkg}")
+                continue
+        
+        filtered_packages.append(pkg)
+
+    print(f"[DEBUG] Scanning for .version files...")
+
+    for vfile in folder.rglob("*.version"):
+        try:
+            dependency = vfile.stem
+            version = vfile.read_text().strip()
+            if version.startswith("task"):
+                version = "dynamic"
+
+            sbom_data["sbom_versioned"].append(f"{dependency}@{version}")
+        except:
+            continue
+    
+    sbom_data["sbom_versioned"] = sorted(set(sbom_data["sbom_versioned"]))
+    sbom_data["sbom_packages"] = sorted(filtered_packages)
+    
+    print(f"[DEBUG] SBOM: {len(sbom_data['sbom_versioned'])} versioned libs, {len(filtered_packages)} packages")
+    
+    return sbom_data
 
 
 def is_valid_human_email(email: str) -> bool:
@@ -129,6 +249,16 @@ def unique_list(items, key_fields=None):
 
 
 def scan_permission_usage(decode_folder, permissions):
+    """
+    Scan smali files to find where permissions are used
+    
+    Args:
+        decode_folder: Path to decoded APK folder
+        permissions: List of permissions to search for
+    
+    Returns:
+        dict: Permission -> {file_path: line_numbers} mapping
+    """
     """
     Scan all .smali files to find where permissions are used
     Returns: dict mapping permission -> {file_path: "line1,line2,..."}
@@ -186,7 +316,6 @@ def scan_permission_usage(decode_folder, permissions):
                     
                     if found_lines:
                         relative_path = str(smali_file.relative_to(smali_folder))
-                        #relative_path = relative_path.replace(".smali", ".java")
                         
                         if perm not in permission_mapping:
                             permission_mapping[perm] = {}
@@ -230,6 +359,16 @@ def get_component_name(component, package_name):
 
 
 def parse_manifest(manifest_path, decode_folder):
+    """
+    Parse AndroidManifest.xml and extract components
+    
+    Args:
+        manifest_path: Path to AndroidManifest.xml
+        decode_folder: Path to decoded APK folder
+    
+    Returns:
+        dict: Manifest data including permissions, activities, services, etc.
+    """
     """Parse AndroidManifest.xml and extract components"""
     result = {
         'permissions': {},
@@ -338,6 +477,15 @@ def parse_manifest(manifest_path, decode_folder):
 
 
 def enrich_domains(domains):
+    """
+    Enrich domain information with GeoIP geolocation data
+    
+    Args:
+        domains: List of domain names
+    
+    Returns:
+        dict: Domain -> enrichment data mapping with IP, country, coordinates
+    """
     """Enrich domain information with geolocation"""
     enriched = {}
     db_path = os.path.join(os.path.dirname(__file__), "GeoLite2-City.mmdb")
@@ -508,7 +656,6 @@ def calculate_file_hashes(file_path):
         }
 
         
-
 
 def extract_app_info(folder_path):
     """Extract app name, package name, main activity, and icon from APK"""
@@ -689,6 +836,16 @@ def find_icon_file(folder, icon_path):
     return None
 
 def perform_scan(folder_path, apk_path=None):
+    """
+    Main scanning function - extracts all security-relevant information from APK
+    
+    Args:
+        folder_path: Path to decoded APK folder
+        apk_path: Optional path to original APK file (for hash calculation)
+    
+    Returns:
+        dict: Complete analysis results including domains, emails, permissions, etc.
+    """
     folder = Path(folder_path)
     trackers_db = load_trackers_db()
     detected_trackers = {}
@@ -722,16 +879,21 @@ def perform_scan(folder_path, apk_path=None):
         'suspicious_api_calls': [],
         'native_libs': [],
         'domains': [],
+        'sbom': {},
     }
     
-    # Collections
+    # Extract SBOM
+    print("[DEBUG] Extracting SBOM...")
+    result['sbom'] = extract_sbom(str(folder), app_info.get('package_name'))
+    
+    # Initialize collections for scan results
     url_file_map = defaultdict(set)
     all_emails = set()  # Changed to set for parallel processing
     suspicious_api_matches = []
     native_libs = []
     domains = []
     
-    # Get all files first for parallel email scanning
+    # Get all files for parallel email scanning for parallel email scanning
     all_files = [p for p in folder.rglob('*') if p.is_file()]
     
     # Parallel email scanning
@@ -742,13 +904,19 @@ def perform_scan(folder_path, apk_path=None):
             all_emails.update(future.result())
     print(f"[DEBUG] Found {len(all_emails)} unique emails")
     
-    # 1) Parse AndroidManifest.xml
+    
+    # ========================================
+    # STEP 1: Parse AndroidManifest.xml
+    # ========================================
     manifest_path = folder / 'AndroidManifest.xml'
     if manifest_path.exists():
         manifest_data = parse_manifest(str(manifest_path), str(folder_path))
         result.update(manifest_data)
     
-    # 2) Walk through all files for other scans
+    
+    # ========================================
+    # STEP 2: Scan all files for URLs, APIs, etc.
+    # ======================================== for other scans
     try:
         for file_path in folder.rglob('*'):
             if not file_path.is_file():
@@ -829,14 +997,20 @@ def perform_scan(folder_path, apk_path=None):
                     'urls': [url]
                 })
     
-    # 3) Deduplicate and assign results
+    
+    # ========================================
+    # STEP 3: Post-process and assign results
+    # ========================================
     result['urls'] = url_results
     result['emails'] = sorted(all_emails)  # Already deduplicated via set, just sort
     result['suspicious_api_calls'] = unique_list(suspicious_api_matches, ["api", "file"])
     result['native_libs'] = unique_list(native_libs)
     result['domains'] = enrich_domains(unique_list(domains))
     
-    # 4) Top suspicious files
+    
+    # ========================================
+    # STEP 4: Compile tracker results
+    # ========================================
 
     # Merge tracker results
     all_found = []

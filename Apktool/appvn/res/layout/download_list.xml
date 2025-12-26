@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@android:color/white" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+        <ListView android:id="@id/size_ordered_list" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        <TextView android:textStyle="bold" android:textColor="@android:color/black" android:gravity="center" android:id="@id/empty" android:layout_width="fill_parent" android:layout_height="fill_parent" android:text="@string/no_downloads" />
+    </FrameLayout>
+    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="horizontal" android:id="@id/selection_menu" android:background="@color/bg_search" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="52.0dip">
+        <TextView android:textColor="@color/white" android:gravity="center" android:layout_gravity="center_vertical" android:id="@id/selection_delete" android:background="@drawable/button_border" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_margin="4.0dip" android:layout_weight="1.0" android:textAllCaps="true" android:fontFamily="sans-serif-medium" />
+        <TextView android:textColor="@color/white" android:gravity="center" android:layout_gravity="center_vertical" android:id="@id/deselect_all" android:background="@drawable/button_border" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_margin="4.0dip" android:text="@string/deselect_all" android:layout_weight="1.0" android:textAllCaps="true" android:fontFamily="sans-serif-medium" />
+    </LinearLayout>
+</LinearLayout>

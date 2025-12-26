@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:layout_width="48.0dip" android:layout_height="48.0dip">
+        <ImageView android:background="@drawable/circle_background" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        <ImageView android:id="@id/icon" android:layout_width="24.0dip" android:layout_height="24.0dip" android:layout_centerInParent="true" />
+    </RelativeLayout>
+    <TextView android:textSize="12.0sp" android:textColor="@android:color/black" android:ellipsize="end" android:id="@id/label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" android:textAlignment="center" />
+</merge>

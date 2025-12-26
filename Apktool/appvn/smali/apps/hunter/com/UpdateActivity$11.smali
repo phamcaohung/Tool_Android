@@ -1,0 +1,370 @@
+.class public Lapps/hunter/com/UpdateActivity$11;
+.super Ljava/lang/Object;
+.source "SourceFile"
+
+# interfaces
+.implements Lapps/hunter/com/callback/GetLinkDownloadCallback;
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingMethod;
+    value = Lapps/hunter/com/UpdateActivity;->getPurchaseTask(Lapps/hunter/com/model/App;)Lapps/hunter/com/task/playstore/PurchaseTask;
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x1
+    name = null
+.end annotation
+
+
+# instance fields
+.field public final synthetic this$0:Lapps/hunter/com/UpdateActivity;
+
+.field public final synthetic val$app:Lapps/hunter/com/model/App;
+
+
+# direct methods
+.method public constructor <init>(Lapps/hunter/com/UpdateActivity;Lapps/hunter/com/model/App;)V
+    .locals 0
+
+    .line 490
+    iput-object p1, p0, Lapps/hunter/com/UpdateActivity$11;->this$0:Lapps/hunter/com/UpdateActivity;
+
+    iput-object p2, p0, Lapps/hunter/com/UpdateActivity$11;->val$app:Lapps/hunter/com/model/App;
+
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public getLinkDownloadError()V
+    .locals 1
+
+    .line 526
+    iget-object v0, p0, Lapps/hunter/com/UpdateActivity$11;->this$0:Lapps/hunter/com/UpdateActivity;
+
+    invoke-static {v0}, Lapps/hunter/com/UpdateActivity;->access$500(Lapps/hunter/com/UpdateActivity;)V
+
+    .line 527
+    iget-object v0, p0, Lapps/hunter/com/UpdateActivity$11;->this$0:Lapps/hunter/com/UpdateActivity;
+
+    invoke-virtual {v0}, Lapps/hunter/com/UpdateActivity;->getLinkDownloadAppvn()V
+
+    return-void
+.end method
+
+.method public getLinkDownloadSuccess(Lcom/github/yeriomin/playstoreapi/AndroidAppDeliveryData;)V
+    .locals 16
+
+    move-object/from16 v0, p0
+
+    move-object/from16 v1, p1
+
+    .line 494
+    invoke-virtual/range {p1 .. p1}, Lcom/github/yeriomin/playstoreapi/AndroidAppDeliveryData;->getDownloadUrl()Ljava/lang/String;
+
+    move-result-object v2
+
+    .line 497
+    invoke-virtual/range {p1 .. p1}, Lcom/github/yeriomin/playstoreapi/AndroidAppDeliveryData;->getAdditionalFileList()Ljava/util/List;
+
+    move-result-object v3
+
+    const-string v4, ""
+
+    const-string v7, "."
+
+    if-eqz v3, :cond_3
+
+    invoke-virtual/range {p1 .. p1}, Lcom/github/yeriomin/playstoreapi/AndroidAppDeliveryData;->getAdditionalFileList()Ljava/util/List;
+
+    move-result-object v3
+
+    invoke-interface {v3}, Ljava/util/List;->size()I
+
+    move-result v3
+
+    if-lez v3, :cond_3
+
+    const/4 v3, 0x0
+
+    move-object v5, v4
+
+    .line 498
+    :goto_0
+    invoke-virtual/range {p1 .. p1}, Lcom/github/yeriomin/playstoreapi/AndroidAppDeliveryData;->getAdditionalFileList()Ljava/util/List;
+
+    move-result-object v6
+
+    invoke-interface {v6}, Ljava/util/List;->size()I
+
+    move-result v6
+
+    if-ge v3, v6, :cond_2
+
+    .line 499
+    invoke-virtual {v1, v3}, Lcom/github/yeriomin/playstoreapi/AndroidAppDeliveryData;->getAdditionalFile(I)Lcom/github/yeriomin/playstoreapi/AppFileMetadata;
+
+    move-result-object v6
+
+    invoke-virtual {v6}, Lcom/github/yeriomin/playstoreapi/AppFileMetadata;->getFileType()I
+
+    move-result v6
+
+    const-string v8, ".obb"
+
+    if-nez v6, :cond_0
+
+    .line 500
+    new-instance v5, Ljava/lang/StringBuilder;
+
+    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
+
+    invoke-virtual {v1, v3}, Lcom/github/yeriomin/playstoreapi/AndroidAppDeliveryData;->getAdditionalFile(I)Lcom/github/yeriomin/playstoreapi/AppFileMetadata;
+
+    move-result-object v6
+
+    invoke-virtual {v6}, Lcom/github/yeriomin/playstoreapi/AppFileMetadata;->getDownloadUrl()Ljava/lang/String;
+
+    move-result-object v6
+
+    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v6, "@main."
+
+    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1, v3}, Lcom/github/yeriomin/playstoreapi/AndroidAppDeliveryData;->getAdditionalFile(I)Lcom/github/yeriomin/playstoreapi/AppFileMetadata;
+
+    move-result-object v6
+
+    invoke-virtual {v6}, Lcom/github/yeriomin/playstoreapi/AppFileMetadata;->getVersionCode()I
+
+    move-result v6
+
+    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v5, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    iget-object v6, v0, Lapps/hunter/com/UpdateActivity$11;->val$app:Lapps/hunter/com/model/App;
+
+    invoke-virtual {v6}, Lapps/hunter/com/model/App;->getPackageName()Ljava/lang/String;
+
+    move-result-object v6
+
+    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v5, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v5
+
+    .line 502
+    :cond_0
+    invoke-virtual {v1, v3}, Lcom/github/yeriomin/playstoreapi/AndroidAppDeliveryData;->getAdditionalFile(I)Lcom/github/yeriomin/playstoreapi/AppFileMetadata;
+
+    move-result-object v6
+
+    invoke-virtual {v6}, Lcom/github/yeriomin/playstoreapi/AppFileMetadata;->getFileType()I
+
+    move-result v6
+
+    const/4 v9, 0x1
+
+    if-ne v6, v9, :cond_1
+
+    .line 503
+    new-instance v4, Ljava/lang/StringBuilder;
+
+    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
+
+    invoke-virtual {v1, v3}, Lcom/github/yeriomin/playstoreapi/AndroidAppDeliveryData;->getAdditionalFile(I)Lcom/github/yeriomin/playstoreapi/AppFileMetadata;
+
+    move-result-object v6
+
+    invoke-virtual {v6}, Lcom/github/yeriomin/playstoreapi/AppFileMetadata;->getDownloadUrl()Ljava/lang/String;
+
+    move-result-object v6
+
+    invoke-virtual {v4, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v6, "@patch."
+
+    invoke-virtual {v4, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1, v3}, Lcom/github/yeriomin/playstoreapi/AndroidAppDeliveryData;->getAdditionalFile(I)Lcom/github/yeriomin/playstoreapi/AppFileMetadata;
+
+    move-result-object v6
+
+    invoke-virtual {v6}, Lcom/github/yeriomin/playstoreapi/AppFileMetadata;->getVersionCode()I
+
+    move-result v6
+
+    invoke-virtual {v4, v6}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v4, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    iget-object v6, v0, Lapps/hunter/com/UpdateActivity$11;->val$app:Lapps/hunter/com/model/App;
+
+    invoke-virtual {v6}, Lapps/hunter/com/model/App;->getPackageName()Ljava/lang/String;
+
+    move-result-object v6
+
+    invoke-virtual {v4, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v4, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v4
+
+    :cond_1
+    add-int/lit8 v3, v3, 0x1
+
+    goto/16 :goto_0
+
+    :cond_2
+    move-object v14, v4
+
+    move-object v9, v5
+
+    goto :goto_1
+
+    :cond_3
+    move-object v9, v4
+
+    move-object v14, v9
+
+    .line 507
+    :goto_1
+    invoke-static {v2}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+
+    move-result v1
+
+    if-nez v1, :cond_4
+
+    .line 508
+    iget-object v1, v0, Lapps/hunter/com/UpdateActivity$11;->this$0:Lapps/hunter/com/UpdateActivity;
+
+    iget-object v3, v0, Lapps/hunter/com/UpdateActivity$11;->val$app:Lapps/hunter/com/model/App;
+
+    invoke-virtual {v3}, Lapps/hunter/com/model/App;->getDisplayName()Ljava/lang/String;
+
+    move-result-object v3
+
+    iget-object v4, v0, Lapps/hunter/com/UpdateActivity$11;->val$app:Lapps/hunter/com/model/App;
+
+    invoke-virtual {v4}, Lapps/hunter/com/model/App;->getVersionName()Ljava/lang/String;
+
+    move-result-object v4
+
+    iget-object v5, v0, Lapps/hunter/com/UpdateActivity$11;->val$app:Lapps/hunter/com/model/App;
+
+    invoke-virtual {v5}, Lapps/hunter/com/model/App;->getPackageName()Ljava/lang/String;
+
+    move-result-object v5
+
+    invoke-static {}, Lapps/hunter/com/YalpStoreApplication;->getAppvn()Lapps/hunter/com/model/Appvn;
+
+    move-result-object v6
+
+    invoke-virtual {v6}, Lapps/hunter/com/model/Appvn;->getImage_cover()Ljava/lang/String;
+
+    move-result-object v6
+
+    invoke-virtual/range {v1 .. v6}, Lapps/hunter/com/UpdateActivity;->startDownload(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 511
+    :cond_4
+    invoke-static {v9}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+
+    move-result v1
+
+    if-nez v1, :cond_5
+
+    const-string v1, "main"
+
+    .line 512
+    invoke-virtual {v9, v1}, Ljava/lang/String;->indexOf(Ljava/lang/String;)I
+
+    move-result v1
+
+    invoke-virtual {v9, v7}, Ljava/lang/String;->lastIndexOf(Ljava/lang/String;)I
+
+    move-result v2
+
+    invoke-virtual {v9, v1, v2}, Ljava/lang/String;->substring(II)Ljava/lang/String;
+
+    move-result-object v12
+
+    .line 513
+    iget-object v8, v0, Lapps/hunter/com/UpdateActivity$11;->this$0:Lapps/hunter/com/UpdateActivity;
+
+    iget-object v1, v0, Lapps/hunter/com/UpdateActivity$11;->val$app:Lapps/hunter/com/model/App;
+
+    invoke-virtual {v1}, Lapps/hunter/com/model/App;->getDisplayName()Ljava/lang/String;
+
+    move-result-object v10
+
+    iget-object v1, v0, Lapps/hunter/com/UpdateActivity$11;->val$app:Lapps/hunter/com/model/App;
+
+    invoke-virtual {v1}, Lapps/hunter/com/model/App;->getPackageName()Ljava/lang/String;
+
+    move-result-object v11
+
+    const-string v13, "main"
+
+    invoke-virtual/range {v8 .. v13}, Lapps/hunter/com/UpdateActivity;->startDownloadObb(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 515
+    :cond_5
+    invoke-static {v14}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+
+    move-result v1
+
+    if-nez v1, :cond_6
+
+    const-string v1, "patch"
+
+    .line 516
+    invoke-virtual {v14, v1}, Ljava/lang/String;->indexOf(Ljava/lang/String;)I
+
+    move-result v1
+
+    invoke-virtual {v14, v7}, Ljava/lang/String;->lastIndexOf(Ljava/lang/String;)I
+
+    move-result v2
+
+    invoke-virtual {v14, v1, v2}, Ljava/lang/String;->substring(II)Ljava/lang/String;
+
+    move-result-object v1
+
+    .line 517
+    iget-object v10, v0, Lapps/hunter/com/UpdateActivity$11;->this$0:Lapps/hunter/com/UpdateActivity;
+
+    iget-object v2, v0, Lapps/hunter/com/UpdateActivity$11;->val$app:Lapps/hunter/com/model/App;
+
+    invoke-virtual {v2}, Lapps/hunter/com/model/App;->getDisplayName()Ljava/lang/String;
+
+    move-result-object v12
+
+    iget-object v2, v0, Lapps/hunter/com/UpdateActivity$11;->val$app:Lapps/hunter/com/model/App;
+
+    invoke-virtual {v2}, Lapps/hunter/com/model/App;->getPackageName()Ljava/lang/String;
+
+    move-result-object v13
+
+    const-string v15, "patch"
+
+    move-object v11, v14
+
+    move-object v14, v1
+
+    invoke-virtual/range {v10 .. v15}, Lapps/hunter/com/UpdateActivity;->startDownloadObb(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+
+    :cond_6
+    return-void
+.end method
