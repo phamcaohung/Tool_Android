@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<apps.hunter.com.widget.ExpansionPanel android:id="@id/permissions_panel" android:background="?android:colorBackground" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="4.0dip" android:elevation="2.0dip" app:headerText="@string/details_permissions"
-  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
-    <LinearLayout android:orientation="vertical" android:id="@id/permissions_container_widgets" android:layout_width="fill_parent" android:layout_height="wrap_content" />
-    <TextView android:textColor="@android:color/black" android:id="@id/permissions_none" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/no_permissions" />
-</apps.hunter.com.widget.ExpansionPanel>
