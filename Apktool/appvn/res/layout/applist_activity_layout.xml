@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout android:id="@id/listContainer" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+        <androidx.cardview.widget.CardView android:layout_gravity="center" android:id="@id/card_view" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="8.0dip" android:layout_marginTop="8.0dip" android:layout_marginRight="8.0dip">
+            <ListView android:id="@android:id/list" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+            <com.rey.material.widget.ProgressView android:layout_gravity="center|top" android:id="@id/progress" android:layout_width="40.0dip" android:layout_height="40.0dip" android:layout_marginTop="30.0dip" app:pv_circular="true" app:pv_progressMode="indeterminate" app:pv_progressStyle="@style/ColorsCircularProgressDrawableStyle" />
+        </androidx.cardview.widget.CardView>
+        <TextView android:textAppearance="?android:textAppearanceLarge" android:gravity="center" android:id="@android:id/empty" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    </RelativeLayout>
+    <ViewStub android:layout_width="wrap_content" android:layout_height="wrap_content" />
+</LinearLayout>

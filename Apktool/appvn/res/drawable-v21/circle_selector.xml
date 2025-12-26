@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple android:color="@color/gray50" android:exitFadeDuration="@android:integer/config_longAnimTime"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/mask">
+        <shape android:shape="oval">
+            <solid android:color="@color/gray50" />
+        </shape>
+    </item>
+</ripple>

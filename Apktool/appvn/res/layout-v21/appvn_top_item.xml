@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="@dimen/collection_item_width" android:layout_height="134.0dip" android:layout_marginLeft="12.0dip" android:layout_marginRight="12.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView android:id="@id/icBackground" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="12.0dip" android:scaleType="centerCrop" android:scaleX="2.0" />
+    <androidx.cardview.widget.CardView android:id="@id/vIconTop" android:layout_width="@dimen/collection_item_width" android:layout_height="@dimen/collection_item_width" android:layout_alignParentTop="true" android:layout_centerHorizontal="true" app:cardCornerRadius="5.0dip">
+        <ImageView android:layout_gravity="center" android:id="@id/icon" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/no_image" android:scaleType="centerCrop" />
+    </androidx.cardview.widget.CardView>
+    <TextView android:textSize="12.0sp" android:textColor="@color/white" android:gravity="center" android:id="@id/tvDownload" android:background="@drawable/button_border" android:paddingLeft="6.0dip" android:paddingRight="6.0dip" android:layout_width="74.0dip" android:layout_height="24.0dip" android:layout_marginTop="84.0dip" android:text="@string/download" android:layout_alignTop="@id/vIconTop" android:layout_centerHorizontal="true" android:elevation="2.0dip" />
+    <RelativeLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="112.0dip" android:layout_alignParentTop="true">
+        <TextView android:textSize="14.0sp" android:textColor="@color/color_author" android:ellipsize="end" android:gravity="center_horizontal" android:layout_gravity="center_horizontal" android:id="@id/tvNameApp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="2.0dip" android:layout_marginRight="2.0dip" android:maxLines="2" android:singleLine="true" android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+</RelativeLayout>

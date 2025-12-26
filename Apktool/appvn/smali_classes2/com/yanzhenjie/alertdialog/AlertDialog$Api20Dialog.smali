@@ -1,0 +1,225 @@
+.class public Lcom/yanzhenjie/alertdialog/AlertDialog$Api20Dialog;
+.super Lcom/yanzhenjie/alertdialog/AlertDialog;
+.source "SourceFile"
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingClass;
+    value = Lcom/yanzhenjie/alertdialog/AlertDialog;
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x9
+    name = "Api20Dialog"
+.end annotation
+
+
+# instance fields
+.field public alertDialog:Landroidx/appcompat/app/AlertDialog;
+
+
+# direct methods
+.method public constructor <init>(Landroidx/appcompat/app/AlertDialog;)V
+    .locals 0
+
+    .line 213
+    invoke-direct {p0}, Lcom/yanzhenjie/alertdialog/AlertDialog;-><init>()V
+
+    .line 214
+    iput-object p1, p0, Lcom/yanzhenjie/alertdialog/AlertDialog$Api20Dialog;->alertDialog:Landroidx/appcompat/app/AlertDialog;
+
+    return-void
+.end method
+
+.method public synthetic constructor <init>(Landroidx/appcompat/app/AlertDialog;Lcom/yanzhenjie/alertdialog/AlertDialog$1;)V
+    .locals 0
+
+    .line 209
+    invoke-direct {p0, p1}, Lcom/yanzhenjie/alertdialog/AlertDialog$Api20Dialog;-><init>(Landroidx/appcompat/app/AlertDialog;)V
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public cancel()V
+    .locals 1
+
+    .line 235
+    iget-object v0, p0, Lcom/yanzhenjie/alertdialog/AlertDialog$Api20Dialog;->alertDialog:Landroidx/appcompat/app/AlertDialog;
+
+    invoke-virtual {v0}, Landroid/app/Dialog;->isShowing()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    .line 236
+    iget-object v0, p0, Lcom/yanzhenjie/alertdialog/AlertDialog$Api20Dialog;->alertDialog:Landroidx/appcompat/app/AlertDialog;
+
+    invoke-virtual {v0}, Landroid/app/Dialog;->cancel()V
+
+    :cond_0
+    return-void
+.end method
+
+.method public dismiss()V
+    .locals 1
+
+    .line 224
+    iget-object v0, p0, Lcom/yanzhenjie/alertdialog/AlertDialog$Api20Dialog;->alertDialog:Landroidx/appcompat/app/AlertDialog;
+
+    invoke-virtual {v0}, Landroid/app/Dialog;->isShowing()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    .line 225
+    iget-object v0, p0, Lcom/yanzhenjie/alertdialog/AlertDialog$Api20Dialog;->alertDialog:Landroidx/appcompat/app/AlertDialog;
+
+    invoke-virtual {v0}, Landroid/app/Dialog;->dismiss()V
+
+    :cond_0
+    return-void
+.end method
+
+.method public getButton(I)Landroid/widget/Button;
+    .locals 1
+
+    .line 241
+    iget-object v0, p0, Lcom/yanzhenjie/alertdialog/AlertDialog$Api20Dialog;->alertDialog:Landroidx/appcompat/app/AlertDialog;
+
+    invoke-virtual {v0, p1}, Landroidx/appcompat/app/AlertDialog;->getButton(I)Landroid/widget/Button;
+
+    move-result-object p1
+
+    return-object p1
+.end method
+
+.method public getContext()Landroid/content/Context;
+    .locals 1
+    .annotation build Landroidx/annotation/NonNull;
+    .end annotation
+
+    .line 253
+    iget-object v0, p0, Lcom/yanzhenjie/alertdialog/AlertDialog$Api20Dialog;->alertDialog:Landroidx/appcompat/app/AlertDialog;
+
+    invoke-virtual {v0}, Landroid/app/Dialog;->getContext()Landroid/content/Context;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public getCurrentFocus()Landroid/view/View;
+    .locals 1
+    .annotation build Landroidx/annotation/Nullable;
+    .end annotation
+
+    .line 259
+    iget-object v0, p0, Lcom/yanzhenjie/alertdialog/AlertDialog$Api20Dialog;->alertDialog:Landroidx/appcompat/app/AlertDialog;
+
+    invoke-virtual {v0}, Landroid/app/Dialog;->getCurrentFocus()Landroid/view/View;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public getLayoutInflater()Landroid/view/LayoutInflater;
+    .locals 1
+    .annotation build Landroidx/annotation/NonNull;
+    .end annotation
+
+    .line 265
+    iget-object v0, p0, Lcom/yanzhenjie/alertdialog/AlertDialog$Api20Dialog;->alertDialog:Landroidx/appcompat/app/AlertDialog;
+
+    invoke-virtual {v0}, Landroid/app/Dialog;->getLayoutInflater()Landroid/view/LayoutInflater;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public getListView()Landroid/widget/ListView;
+    .locals 1
+    .annotation build Landroidx/annotation/Nullable;
+    .end annotation
+
+    .line 247
+    iget-object v0, p0, Lcom/yanzhenjie/alertdialog/AlertDialog$Api20Dialog;->alertDialog:Landroidx/appcompat/app/AlertDialog;
+
+    invoke-virtual {v0}, Landroidx/appcompat/app/AlertDialog;->getListView()Landroid/widget/ListView;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public getOwnerActivity()Landroid/app/Activity;
+    .locals 1
+    .annotation build Landroidx/annotation/Nullable;
+    .end annotation
+
+    .line 271
+    iget-object v0, p0, Lcom/yanzhenjie/alertdialog/AlertDialog$Api20Dialog;->alertDialog:Landroidx/appcompat/app/AlertDialog;
+
+    invoke-virtual {v0}, Landroid/app/Dialog;->getOwnerActivity()Landroid/app/Activity;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public getVolumeControlStream()I
+    .locals 1
+
+    .line 276
+    iget-object v0, p0, Lcom/yanzhenjie/alertdialog/AlertDialog$Api20Dialog;->alertDialog:Landroidx/appcompat/app/AlertDialog;
+
+    invoke-virtual {v0}, Landroid/app/Dialog;->getVolumeControlStream()I
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public getWindow()Landroid/view/Window;
+    .locals 1
+    .annotation build Landroidx/annotation/Nullable;
+    .end annotation
+
+    .line 282
+    iget-object v0, p0, Lcom/yanzhenjie/alertdialog/AlertDialog$Api20Dialog;->alertDialog:Landroidx/appcompat/app/AlertDialog;
+
+    invoke-virtual {v0}, Landroid/app/Dialog;->getWindow()Landroid/view/Window;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public isShowing()Z
+    .locals 1
+
+    .line 230
+    iget-object v0, p0, Lcom/yanzhenjie/alertdialog/AlertDialog$Api20Dialog;->alertDialog:Landroidx/appcompat/app/AlertDialog;
+
+    invoke-virtual {v0}, Landroid/app/Dialog;->isShowing()Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public show()V
+    .locals 1
+
+    .line 219
+    iget-object v0, p0, Lcom/yanzhenjie/alertdialog/AlertDialog$Api20Dialog;->alertDialog:Landroidx/appcompat/app/AlertDialog;
+
+    invoke-virtual {v0}, Landroid/app/Dialog;->show()V
+
+    return-void
+.end method

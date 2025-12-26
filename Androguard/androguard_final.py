@@ -261,30 +261,6 @@ def inspect_instruction_for_api(instr_output):
     return list(found)
 
 
-def categorize_api_call(api_name, instruction=None):
-    """
-    Categorize API call into telephony, network, or dynamic.
-    """
-    api_lower = api_name.lower()
-    
-    # Check telephony
-    for pattern in API_CATEGORIES["telephony"]:
-        if pattern.lower() in api_lower:
-            return "telephony"
-    
-    # Check network
-    for pattern in API_CATEGORIES["network"]:
-        if pattern.lower() in api_lower:
-            return "network"
-    
-    # Check dynamic
-    for pattern in API_CATEGORIES["dynamic"]:
-        if pattern.lower() in api_lower:
-            return "dynamic"
-    
-    return None
-
-
 def scan_methods_for_apis_fast(d, dex_name, dx):
     """
     Efficiently scan methods for suspicious API calls.

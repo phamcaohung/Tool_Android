@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@color/ss_white" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:background="@android:color/transparent" android:layout_width="fill_parent" android:layout_height="fill_parent"
+      xmlns:android="http://schemas.android.com/apk/res/android">
+        <TextView android:textStyle="bold" android:textColor="@color/ss_blue" android:gravity="center" android:layout_gravity="right" android:id="@id/ss_cancelBtn" android:paddingLeft="16.0dip" android:paddingTop="8.0dip" android:paddingBottom="8.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="4.0dip" android:layout_marginRight="16.0dip" android:minHeight="56.0dip" android:text="@string/cancel" android:drawableRight="@drawable/ic_next_blue" />
+        <View android:background="@color/ss_black_30" android:layout_width="fill_parent" android:layout_height="1.0px" />
+        <ImageView android:layout_gravity="right" android:id="@id/ss_closeBtn" android:padding="4.0dip" android:visibility="gone" android:layout_width="40.0dip" android:layout_height="40.0dip" android:src="@drawable/ic_close" />
+        <LinearLayout android:gravity="center" android:layout_gravity="center_vertical" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <TextView android:textSize="18.0sp" android:textStyle="bold" android:textColor="@color/ss_blue" android:id="@id/ss_promoteAppLbl" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/promote_app" />
+            <ImageView android:id="@id/ss_promoteAppImg" android:visibility="gone" android:layout_width="120.0dip" android:layout_height="120.0dip" />
+            <ImageView android:id="@id/ssCover" android:background="@android:color/white" android:visibility="visible" android:layout_width="200.0dip" android:layout_height="100.0dip" android:layout_marginLeft="24.0dip" android:layout_marginTop="16.0dip" android:layout_marginRight="24.0dip" android:layout_marginBottom="8.0dip" android:scaleType="fitXY" />
+            <TextView android:textSize="15.0sp" android:textColor="@android:color/darker_gray" android:ellipsize="end" android:id="@id/ss_promoteAppDescription" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="24.0dip" android:layout_marginTop="12.0dip" android:layout_marginRight="24.0dip" android:text="@string/details_description" android:lines="3" android:shadowColor="#ffffffff" android:shadowDx="1.0" android:shadowDy="1.0" android:shadowRadius="1.0" />
+            <TextView android:textColor="@android:color/white" android:gravity="center" android:id="@id/ss_okBtn" android:background="@drawable/ss_btn_blue_selector" android:paddingTop="12.0dip" android:paddingBottom="12.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="24.0dip" android:layout_marginTop="16.0dip" android:layout_marginRight="24.0dip" android:layout_marginBottom="12.0dip" android:minWidth="100.0dip" android:text="@string/ok" android:textAllCaps="true" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

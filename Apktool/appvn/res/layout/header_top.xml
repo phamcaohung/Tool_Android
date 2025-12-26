@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:layout_width="fill_parent" android:layout_height="175.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="175.0dip">
+        <apps.hunter.com.autoscrollviewpager.AutoScrollViewPager android:id="@id/bannerPager" android:layout_width="fill_parent" android:layout_height="175.0dip" />
+        <com.google.android.material.tabs.TabLayout android:id="@id/tabDots" android:layout_width="70.0dip" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" app:tabBackground="@drawable/dot_sliding_selector" app:tabGravity="center" app:tabIndicatorHeight="0.0dip" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
