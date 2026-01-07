@@ -629,31 +629,31 @@ def get_file_size(file_path):
         return None
 
 
-def calculate_file_hashes(file_path):
-    """Calculate MD5, SHA1, SHA256 hashes of a file"""
-    md5_hash = hashlib.md5()
-    sha1_hash = hashlib.sha1()
-    sha256_hash = hashlib.sha256()
+# def calculate_file_hashes(file_path):
+#     """Calculate MD5, SHA1, SHA256 hashes of a file"""
+#     md5_hash = hashlib.md5()
+#     sha1_hash = hashlib.sha1()
+#     sha256_hash = hashlib.sha256()
     
-    try:
-        with open(file_path, 'rb') as f:
-            # Read file in chunks to handle large files
-            for chunk in iter(lambda: f.read(4096), b''):
-                md5_hash.update(chunk)
-                sha1_hash.update(chunk)
-                sha256_hash.update(chunk)
+#     try:
+#         with open(file_path, 'rb') as f:
+#             # Read file in chunks to handle large files
+#             for chunk in iter(lambda: f.read(4096), b''):
+#                 md5_hash.update(chunk)
+#                 sha1_hash.update(chunk)
+#                 sha256_hash.update(chunk)
         
-        return {
-            'md5': md5_hash.hexdigest(),
-            'sha1': sha1_hash.hexdigest(),
-            'sha256': sha256_hash.hexdigest()
-        }
-    except Exception as e:
-        return {
-            'md5': None,
-            'sha1': None,
-            'sha256': None
-        }
+#         return {
+#             'md5': md5_hash.hexdigest(),
+#             'sha1': sha1_hash.hexdigest(),
+#             'sha256': sha256_hash.hexdigest()
+#         }
+#     except Exception as e:
+#         return {
+#             'md5': None,
+#             'sha1': None,
+#             'sha256': None
+#         }
 
         
 
@@ -959,7 +959,6 @@ def perform_scan(folder_path, apk_path=None):
                     except:
                         pass
                 
-                # Email extraction is now done in parallel above, removed from here
                 
                 # Extract suspicious API calls
                 for match in SUSPICIOUS_API_PATTERN.finditer(content):
