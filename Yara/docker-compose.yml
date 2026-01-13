@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  yara-scanner:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: yara-scanner
+    ports:
+      # Map port 5080 từ container ra host
+      - "5080:5080"
+    volumes:
+      # Mount thư mục rules từ host vào container
+      # Cho phép người dùng chỉnh sửa rules mà không cần rebuild image
+      - ./rules:/app/rules
+      # Mount thư mục apk_extracts để có thể xem các file đã extract (optional)
+      - ./apk_extracts:/app/apk_extracts
+    restart: unless-stopped
+    environment:
+      # Có thể thêm các biến môi trường nếu cần
+      - PYTHONUNBUFFERED=1
+    healthcheck:
+      # Kiểm tra health của service
+      # Lưu ý: endpoint này sẽ trả về 400 nếu không có file, nhưng service vẫn hoạt động
+      test: ["CMD", "python", "-c", "import requests; r = requests.get('http://localhost:5080/analyze', timeout=1); exit(0 if r.status_code in [400, 500] else 1)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+

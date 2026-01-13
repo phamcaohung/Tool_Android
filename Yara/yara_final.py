@@ -1,12 +1,20 @@
-import os, re, tempfile, shutil, zipfile, yara
+import os
+import re
+import tempfile
+import shutil
+import zipfile
+import yara
 from flask import Flask, request, jsonify
-
 
 app = Flask(__name__)
 
-# Directories
-RULE_DIR = "./rules"
-EXTRACT_BASE_DIR = "./apk_extracts"
+# Sử dụng os.path.join và absolute paths để đảm bảo tương thích cross-platform (Windows/Linux)
+# Lấy đường dẫn tuyệt đối của thư mục chứa script
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Directories - sử dụng absolute paths
+RULE_DIR = os.path.join(BASE_DIR, "rules")
+EXTRACT_BASE_DIR = os.path.join(BASE_DIR, "apk_extracts")
 
 # String filtering
 STRING_BLACKLIST = ['schemas.android.com']
@@ -24,15 +32,40 @@ URL_REGEX = re.compile(r'https?://[a-zA-Z0-9\-._~:/?#\[\]@!$&\'()*+,;=%]+')
 
 # YARA RULES LOADING
 def load_yara_rules():
-    """Load all YARA rules from RULE_DIR"""
+    """
+    Load tất cả các YARA rules từ thư mục rules/
+    Returns: Compiled YARA rules object
+    """
     rule_files = {}
+    
+    # Kiểm tra thư mục rules có tồn tại không
+    if not os.path.exists(RULE_DIR):
+        raise FileNotFoundError(f"Thư mục rules không tồn tại: {RULE_DIR}")
+    
+    # Đọc tất cả file .yar trong thư mục rules
     for file in os.listdir(RULE_DIR):
         if file.endswith(".yar"):
             namespace = file.replace(".yar", "")
-            rule_files[namespace] = os.path.join(RULE_DIR, file)
+            rule_path = os.path.join(RULE_DIR, file)
+            rule_files[namespace] = rule_path
+    
+    if not rule_files:
+        raise ValueError(f"Không tìm thấy file .yar nào trong thư mục: {RULE_DIR}")
+    
     return yara.compile(filepaths=rule_files)
 
-rules = load_yara_rules()
+# Load YARA rules khi khởi động ứng dụng
+rules = None
+rules_count = 0
+
+try:
+    rules = load_yara_rules()
+    # Đếm số file rules đã load
+    rules_count = len([f for f in os.listdir(RULE_DIR) if f.endswith(".yar")])
+    print(f"[INFO] Đã load {rules_count} YARA rule file(s) từ {RULE_DIR}")
+except Exception as e:
+    print(f"[ERROR] Không thể load YARA rules: {e}")
+    rules = None
 
 
 
@@ -190,15 +223,19 @@ def extract_urls_from_file(file_path, yara_rules):
 
 # STRING PROCESSING
 def get_string_bucket(file_path):
-    """Determine bucket type based on file path"""
+    """
+    Xác định loại bucket dựa trên đường dẫn file
+    Returns: "strings_code", "strings_so", "strings_apk_res", hoặc None
+    """
     path_lower = file_path.lower()
+    # Normalize path separator để tương thích cả Windows và Linux
     path_normalized = file_path.replace('\\', '/')
     
     if "classes" in path_lower and path_lower.endswith(".dex"):
         return "strings_code"
     elif path_lower.endswith(".so"):
         return "strings_so"
-    elif path_normalized.startswith(("res/", "res\\")):
+    elif path_normalized.startswith("res/"):
         return "strings_apk_res"
     else:
         return None
@@ -322,7 +359,8 @@ def scan_directory_with_yara(extract_dir, yara_rules):
                 try:
                     file_urls = extract_urls_from_file(file_path, yara_rules)
                     if file_urls:
-                        path_normalized = relative_path.replace('/', '\\')
+                        # Normalize path separator để tương thích cross-platform
+                        path_normalized = relative_path.replace('\\', '/')
                         all_urls[path_normalized] = file_urls
                         print(f"[INFO] Found {len(file_urls)} URL(s) in: {relative_path}")
                 except:
@@ -357,11 +395,24 @@ def scan_directory_with_yara(extract_dir, yara_rules):
 # API ENDPOINTS
 @app.route("/analyze", methods=["POST"])
 def analyze_apk():
-    """Analyze uploaded APK file"""
+    """
+    API endpoint để scan APK file với YARA rules
+    POST /analyze với file trong form-data
+    """
+    # Kiểm tra rules đã được load chưa
+    if rules is None:
+        return jsonify({'error': 'YARA rules chưa được load. Vui lòng kiểm tra lại.'}), 500
+    
+    # Kiểm tra file có trong request không
     if 'file' not in request.files:
         return jsonify({'error': 'Missing APK file'}), 400
     
     apk = request.files["file"]
+    
+    # Kiểm tra file có tên không
+    if apk.filename == '':
+        return jsonify({'error': 'No file selected'}), 400
+    
     apk_path = None
     
     try:
@@ -416,5 +467,18 @@ def analyze_apk():
 
 
 if __name__ == '__main__':
+    # Kiểm tra rules đã được load trước khi start server
+    if rules is None:
+        print('[ERROR] Không thể khởi động server vì YARA rules chưa được load')
+        exit(1)
+    
+    # Đảm bảo thư mục extract tồn tại
+    os.makedirs(EXTRACT_BASE_DIR, exist_ok=True)
+    
     print('[INFO] Server starting at http://0.0.0.0:5080')
+    print('[INFO] YARA rules directory:', RULE_DIR)
+    print('[INFO] APK extract directory:', EXTRACT_BASE_DIR)
+    # Chạy Flask app
+    # host='0.0.0.0' để có thể truy cập từ bên ngoài container
+    # threaded=True để xử lý nhiều request đồng thời
     app.run(host='0.0.0.0', port=5080, debug=False, threaded=True)
